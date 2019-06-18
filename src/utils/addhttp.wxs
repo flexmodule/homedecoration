@@ -1,0 +1,36 @@
+var isaddhttp = function (str) {
+  if(str.indexOf("http") > -1) {
+		return str
+	} else {
+		return baseUrl2+str
+	}
+}
+var currency = function(currencyName){
+	if(currencyName != null || currencyName){
+		currencyName = currencyName.replace('HKD', 'HK$')   //港币
+			.replace('JPY', '￥')   //日元
+			.replace('KRW', '₩')   //韩元
+			.replace('MYR', 'RM')  //林吉特
+			.replace('IDR', 'Rp')  //印尼盾
+			.replace('VND', '₫')   //越南盾
+			.replace('THB', '฿')   //泰铢
+			.replace('CNY', '¥')   //人民币
+			
+	}
+	return currencyName;
+}
+var newTofixed = function(num,digital){  
+	return Number(num).toFixed(digital);
+}  
+var splitString = function(string,index){
+	if(string){
+		var splitString = 	string.split('|')[index]
+	}
+	return splitString;
+}
+module.exports = {
+  isaddhttp: isaddhttp,
+	currency:currency,
+	newTofixed:newTofixed,
+	splitString:splitString
+};

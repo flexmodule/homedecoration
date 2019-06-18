@@ -1,0 +1,122 @@
+<style lang="less">
+  .Tab {
+		display: flex; 
+		background: #fff;
+		border-top: 1rpx solid #eee;
+		position: fixed;
+		bottom: 0;
+		z-index: 99;
+		width: 100%;
+		padding: 20rpx 10rpx;
+		box-sizing: border-box;
+	 	.home,.search,.activity,.my {
+			 flex: 1;
+			 text-align: center;
+			 .home-t,.search-t,.activity-t,.my-t {
+				 width: 48rpx;
+				 height: 48rpx;
+				 margin: 0 auto;
+				 image {
+					 width: 100%;
+					 height: 100%;
+				 }
+			 }
+			 .home-b,.search-b,.activity-b,.my-b {
+				 font: 26rpx/30rpx "";
+			 }
+		 }
+		 .kefu {
+			 position: absolute;
+			 right: 10rpx;
+			 bottom: 130rpx;
+			 width: 80rpx;
+			 height: 80rpx;
+			 button {
+				 width: 100%;
+				 height: 100%;
+				 border: 0;
+				 background: none;
+				 image {
+					 width: 100%;
+				   height: 100%;
+				 }
+			 }
+		 }
+  }
+</style>
+<template>
+  <view class="Tab">
+    <view class="home" @tap="tohome">
+			<view class="home-t"><image src="../img/home.png"></image></view>
+			<view class="home-b">首页</view>
+		</view>
+		<view class="search" @tap="tosearch">
+			<view class="search-t"><image src="../img/tabsearch.png"></image></view>
+			<view class="search-b">分类搜索</view>
+		</view>
+		<view class="activity" @tap="toactivity">
+			<view class="activity-t"><image src="../img/activity.png"></image></view>
+			<view class="activity-b">当前活动</view>
+		</view>
+		<view class="my" @tap="tomy">
+			<view class="my-t"><image src="../img/my.png"></image></view>
+			<view class="my-b">我的</view>
+		</view>
+		<view class="kefu">
+			<button open-type="contact" bindcontact="handleContact" plain="true">
+        <image src="../img/kefu.png"></image>
+      </button> 
+		</view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class Tab extends wepy.component {
+		data = {
+      
+    }
+
+    events = {
+      
+    }
+
+    methods = {
+			handleContact(e) {
+      console.log(e.path);
+      console.log(e.query);
+    },
+      tohome() {
+				wepy.redirectTo({
+					url: `/pages/home/index`, 
+					success: function() {}, 
+					fail: function() {}
+        });
+			},
+			tosearch() {
+				wepy.redirectTo({
+					url: `/pages/search/index`, 
+					success: function() {}, 
+					fail: function() {}
+        });
+			},
+			toactivity() {
+				wepy.redirectTo({
+					url: `/pages/activity/index`, 
+					success: function() {}, 
+					fail: function() {}
+        });
+			},
+			tomy() {
+				wepy.redirectTo({
+					url: `/pages/my/index`, 
+					success: function() {}, 
+					fail: function() {}
+        });
+			}
+    }
+
+    onLoad () {
+    }
+  }
+</script>

@@ -1,0 +1,51 @@
+<style lang="less">
+  .Activity {
+
+	}
+</style>
+<template>
+  <view class="Activity">
+    <returnvalue></returnvalue>
+		<tab></tab>
+  </view>
+</template>
+
+<script>
+	import wepy from 'wepy'
+	import Tab from '@/components/tab' 
+	import Returnvalue from '@/components/returnvalue' 
+  export default class Activity extends wepy.page {
+    config = {
+      navigationBarTitleText: '热门活动'
+    }
+    components = {
+			tab:Tab,
+			returnvalue:Returnvalue
+    }
+
+
+    data = {
+      mynum: 20,
+      
+    }
+
+    computed = {
+     
+    }
+
+    methods = {
+
+      
+     
+    }
+
+    events = {
+      
+    }
+
+    onLoad() {
+      let self = this
+      
+    }
+  }
+</script>

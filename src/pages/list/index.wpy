@@ -1,0 +1,47 @@
+<style lang="less">
+  .List {
+
+	}
+</style>
+<template>
+  <view class="List">
+    List
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class List extends wepy.page {
+    config = {
+      navigationBarTitleText: '麦优单列表页'
+    }
+    components = {
+      
+    }
+
+
+    data = {
+      mynum: 20,
+      
+    }
+
+    computed = {
+     
+    }
+
+    methods = {
+
+      
+     
+    }
+
+    events = {
+      
+    }
+
+    onLoad() {
+      let self = this
+      
+    }
+  }
+</script>

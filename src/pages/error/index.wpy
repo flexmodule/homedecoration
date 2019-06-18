@@ -1,0 +1,47 @@
+<style lang="less">
+.Error {
+	
+}
+</style>
+<template>
+  <view class="Error">
+    error
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import api from '@/api/api.js';
+import Template from '@/utils/template';
+import Tab from '@/components/tab' 
+export default class Error extends wepy.page {
+  config = {
+    navigationBarTitleText: '首页',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#f9dc8e',
+    navigationBarTextStyle: 'white'
+  };
+  components = {
+		tab: Tab
+	}
+  data = {
+    
+  };
+
+  computed = {};
+
+  methods = {
+   
+    
+  };
+ 
+  
+
+  events = {};
+
+  onLoad() {
+    let self = this;
+
+  }
+}
+</script>

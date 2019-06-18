@@ -1,0 +1,454 @@
+<style lang="less">
+  .Search {
+		padding-bottom: 160rpx;
+		.main {
+			padding: 10rpx;
+			.title {
+				text-align: center;
+				font: 26rpx/52rpx "";
+			}
+			.mainbody {
+				.data {
+					display: flex;
+					.data-l {
+						width: 80rpx;
+						font: 24rpx/46rpx "";
+					}
+					.data-r {
+						flex: 1;
+						.label,picker {
+							display: inline-block;
+							background: #f9dc8e;
+							padding:10rpx;
+							margin:0 10rpx 10rpx 0;
+							color: #fff;
+							font: 26rpx/26rpx "";
+							border-radius: 24rpx;
+							.picker {
+								color: #fff;
+							}
+						}
+					}
+				}
+				.date {
+					.data-r {
+						.active {
+							background: #ec3a4e;
+						}
+					}
+				}
+			}
+		}
+		.searchinput {
+			display: flex;
+			height: 48rpx;
+			.searchinput-l {
+				background: #fff;
+				display: flex;
+				align-items: center;
+				flex: 1;
+				border-radius: 22rpx;
+				.img {
+					width: 48rpx;
+					height: 48rpx;
+					image {
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.blankimg {
+					width: 40rpx;
+					height: 40rpx;
+					image {
+						width: 100%;
+						height: 100%;
+					}
+				}
+				input {
+					flex: 1;
+					padding: 0 10rpx;
+					box-sizing: border-box;
+					font: 26rpx/48rpx "";
+				}
+			}
+			.searchinput-r {
+				width: 100rpx;
+				text-align: center;
+				font: 26rpx/48rpx "";
+			}
+			.labellist {
+				background: #fff;
+				position: absolute;
+				max-height: 400rpx;
+				overflow-y: scroll;
+				box-shadow: 0 0 5rpx rgba(0,0,0,.1);
+				z-index: 99;
+				margin: 58rpx auto 0;
+				width: 100%;
+				left: 0;
+				padding: 20rpx;
+				box-sizing: border-box;
+				border-radius: 20rpx;
+				.searchlabel {
+					padding: 15rpx 0;
+					font: 30rpx/30rpx "";
+					border-bottom: 1rpx solid #eee;
+				}
+		}
+		}
+		.searchlist {
+			padding: 20rpx;
+      .mainbody {
+				display: flex;
+				background: #fff;
+        align-items: center;
+        padding: 20rpx;
+        box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.05);
+        margin-bottom: 20rpx;
+        border-radius: 20rpx;
+        position: relative;
+        .mainbody-l {
+          width: 200rpx;
+          height: 200rpx;
+          border-radius: 10rpx;
+          margin-right: 20rpx;
+          image {
+            width: 100%;
+            height: 100%;
+            border-radius: 10rpx;
+          }
+        }
+        .mainbody-r {
+          width: 400rpx;
+          .title {
+            font: 700 28rpx/28rpx '';
+            color: #282828;
+          }
+          .des {
+            color: #999999;
+            font: 24rpx/24rpx '';
+            margin: 20rpx 0 30rpx;
+          }
+          .position {
+            display: flex;
+            align-items: center;
+            .position-l {
+              width: 48rpx;
+              height: 48rpx;
+              margin-right: 10rpx;
+              image {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .position-r {
+              font: 24rpx/30rpx '';
+              color: #282828;
+            }
+          }
+          .money {
+            margin-top: 10rpx;
+            display: flex;
+            align-items: center;
+            .money-l {
+              width: 48rpx;
+              height: 48rpx;
+              margin-right: 10rpx;
+              image {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .money-r {
+              font: 24rpx/40rpx '';
+              color: #282828;
+            }
+          }
+        }
+        .detail {
+          width: 150rpx;
+          position: absolute;
+          right: 20rpx;
+          bottom: 10rpx;
+          text-align: center;
+          background: #f9dc8e;
+          color: #fff;
+          border-radius: 20rpx;
+          font: 24rpx/50rpx '';
+        }
+      }
+		}
+		.wenxininfo {
+      font: 22rpx/64rpx '';
+      color: #999;
+      background: #eee;
+      text-align: center;
+    }
+	}
+</style>
+<template>
+  <view class="Search">
+		<returnvalue></returnvalue>
+		<view class="main">
+			<view class="title">筛选搜索条件</view>
+			<view class="mainbody">
+				<view class="data">
+					<view class="data-l">渠道:</view>
+					<view class="data-r">
+						<repeat for="{{channeldata}}" key="index" index="index" item="item">
+							<view class="label">{{item}}</view>
+						</repeat>
+					</view>
+				</view>
+				<view class="data">
+					<view class="data-l">标签:</view>
+					<view class="data-r">
+						<repeat for="{{labeldata}}" key="index" index="index" item="item">
+							<view class="label">{{item}}</view>
+						</repeat>
+					</view>
+				</view>
+				<view class="data date">
+					<view class="data-l">日期:</view>
+					<view class="data-r">
+						<view class="data-rt">
+							<repeat for="{{datedata}}" key="index" index="index" item="item">
+								<view class="label {{dateindex==index?'active':''}}" @tap="selectdate({{item}})">{{item}}</view>
+							</repeat>
+							<picker
+									mode="date"
+									value="{{dastartdatee}}"
+									start="2017-09-01"
+									end="2050-09-01"
+									@change="bindDateChange"
+									class="{{dateindex==2?'active':''}}"
+								>
+								<view class="picker">{{datatxt}}</view>
+							</picker>
+						</view>
+						<view class="data-rb">{{startdate}}——{{enddate}}</view>
+					</view>
+				</view>
+				<view class="data">
+					<view class="data-l">模式:</view>
+					<view class="data-r">
+						<repeat for="{{patterndata}}" key="index" index="index" item="item">
+							<view class="label">{{item}}</view>
+						</repeat>
+					</view>
+				</view>
+			</view>
+			<view class="searchinput">
+				<view class="searchinput-l">
+					<view class="img"><image src="../../img/search.png"></image></view>
+					<input @input="inputlabel" value="{{inputvalue}}"/>
+					<view class="blankimg" wx:if="{{isblank}}" @tap="inputblank"><image src="../../img/blank.png"></image></view>
+				</view>
+				<view class="searchinput-r">搜索</view>
+				<view class="labellist" wx:if="{{islabel}}">
+					<repeat for="{{selectlabel}}" key="index" index="index" item="item">
+						<view class="searchlabel" @tap="selectsearchlabel({{item}})">{{item}}</view>
+					</repeat>
+				</view>
+			</view>
+		</view>
+		<view class="searchlist">
+			<repeat for="{{searchdata}}" key="index" index="index" item="item">
+				<view class="mainbody">
+					<view class="mainbody-l" wx:if="{{item.mainImg?true:false}}">
+						<image src="{{item.mainImg?item.mainImg:'../../img/static.png'}}"></image>
+					</view>
+					<view class="mainbody-r">
+						<view class="title">{{item.name?item.name:''}}</view>
+						<view class="des">{{item.descriptions?item.descriptions:''}}</view>
+						<view class="position">
+							<view class="position-l">
+								<image src="../../img/place.png"></image>
+							</view>
+							<view class="position-r">{{item.area?item.area:''}}</view>
+						</view>
+						<view class="money">
+							<view class="money-l">
+								<image src="../../img/money.png"></image>
+							</view>
+							<view class="money-r">¥{{item.averagePrice?item.averagePrice:''}}</view>
+						</view>
+						<view class="detail">详情</view>
+					</view>
+				</view>
+			</repeat>
+		</view>
+		<view class="wenxininfo"><text wx:if="{{loadmore}}">加载中...</text><text wx:if="{{nomore}}">客官，俺也是有底线的。</text></view>
+		<tab></tab>
+  </view>
+</template>
+
+<script>
+	import wepy from 'wepy'
+	import api from '@/api/api.js';
+	import Tab from '@/components/tab' ;
+	import Template from '@/utils/template';
+	import Returnvalue from '@/components/returnvalue' 
+	import Tool from '@/utils/tem.js' 
+  export default class Search extends wepy.page {
+    config = {
+      navigationBarTitleText: '麦优单超级分类搜索'
+    }
+    components = {
+			tab:Tab,
+			returnvalue:Returnvalue
+    }
+
+
+    data = {
+			channeldata:["线上","同城线下"],
+			labeldata:["美食","休闲娱乐","旅游","银行卡联合优惠"],
+			patterndata:["去收钱","去买单"],
+			datedata:["今日","明日"],
+			startdate:"",
+			enddate:"",
+			datatxt:"选择其它日期",
+			labellist:["肯德基","肯德基1","肯德基2","肯德基3","肯德基4","肯德基5","肯德基6","名创优品","麦当劳","一点点"],
+			selectlabel:[],
+			islabel:false,
+			inputvalue:"",
+			isblank:false,
+			dateindex:0,
+			searchdata: [],
+			params: {
+				pageNo: 1,
+				pageSize: 10,
+				end: false,
+			},
+			loadmore: false,
+      nomore: false,
+    }
+
+    computed = {
+     
+    }
+
+    methods = {
+			inputblank() {
+				this.inputvalue="";
+				this.isblank=false;
+				this.islabel = false;
+			},
+			selectsearchlabel(item) {
+				this.inputvalue=item;
+				this.islabel = false;
+				this.$apply();
+			},
+			inputlabel(e) {
+			let codereg = /<script.*?>.*?<\/script>/gi;
+			let that=this;
+			Tool.judgecode(e.detail.value,(str)=>{
+				if(str) {
+					this.isblank=true;
+				} else {
+					this.isblank=false;
+				}
+			},(str)=>{
+				this.inputvalue=str;
+				this.selectlabel = []; 
+				if(this.inputvalue) {
+					this.labellist.forEach(e=> {
+						let inputKey = that.inputvalue.toLowerCase();
+						let textKey = e.toLowerCase();
+						if (textKey.indexOf(inputKey) > -1) {
+							that.islabel = true;
+							that.selectlabel.push(e);
+						}
+					});
+				} else {
+					that.islabel = false;
+				}
+			},()=>{
+				this.inputvalue="";
+				this.$apply();
+			})
+			},
+			bindDateChange(e) {
+				this.dateindex=2;
+				if(this.datatxt=="选择其它日期") {
+					this.startdate=e.detail.value;
+					this.datatxt="选择截止日期";
+				} else {
+					this.enddate=e.detail.value;
+					this.datatxt="选择其它日期"
+				}
+			},
+			selectdate(data) {
+				if(data=="今日") {
+					this.dateindex=0;
+					this.startdate=Tool.gettodayDate();
+					this.enddate=Tool.gettodayDate();
+				} else if (data=="明日") {
+					this.dateindex=1;
+					this.startdate=Tool.getsecDate();
+					this.enddate=Tool.getsecDate();
+				}
+			}
+		}
+		async storelist() {
+		let that = this;
+    const res = await wepy.getLocation({ type: 'wgs84' });
+    that.latitude = res.latitude;
+    that.longitude = res.longitude;
+    let data = {
+      type: 1,
+      takeoutSwitch: 1,
+      pageNo: that.params.pageNo,
+      pageSize: that.params.pageSize,
+      currentLatitude: that.latitude,
+      currentLongitude: that.longitude,
+      lang: ''
+    };
+    const json = await api.hostGoodsList({ query: data });
+    if (json.data.meta.success) {
+			let arr = json.data.list;
+			arr.forEach((item, i) => { 
+				that.searchdata.push(item);
+			});
+			that.loadmore = false;
+			if (arr.length < that.params.pageSize) {
+				that.nomore = true;
+				that.loadmore = false;
+				that.params.end = true;
+			} else {
+				that.params.pageSize++;
+			}
+			if (
+				(that.searchdata &&
+					that.searchdata.length === 0) ||
+				!that.searchdata
+			) {
+				that.nomore = false;
+			}
+    } else {
+      Template.error(json.data.meta.message);
+    }
+    that.$apply();
+	}
+	onReachBottom() {
+		if (!this.params.end) {
+			that.loadmore = true;
+      this.storelist();
+    }
+	}
+    events = {
+      
+    }
+		onShow() {
+			this.startdate=Tool.gettodayDate();
+			this.enddate=Tool.gettodayDate();
+		}
+    onLoad() {
+			let self = this
+			this.islabel=false;
+			this.isblank=false;
+			this.dateindex=0;
+			this.storelist();
+    }
+  }
+</script>

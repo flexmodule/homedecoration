@@ -1,0 +1,77 @@
+<style lang="less">
+.Home {
+	
+}
+</style>
+<template>
+  <view class="Home">
+    home
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import api from '@/api/api.js';
+import Template from '@/utils/template';
+import Tab from '@/components/tab' 
+export default class Home extends wepy.page {
+  config = {
+    navigationBarTitleText: '首页',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#f9dc8e',
+    navigationBarTextStyle: 'white'
+  };
+  components = {
+		tab: Tab
+	}
+  data = {
+    
+  };
+
+  computed = {};
+
+  methods = {
+   
+    tosearch() {
+      wepy.navigateTo({
+        url: '/pages/search/index',
+        success: function() {},
+        fail: function() {},
+        complete: function() {}
+      });
+    }
+  };
+  async storelist() {
+    let that = this;
+    const res = await wepy.getLocation({ type: 'wgs84' });
+    that.latitude = res.latitude;
+    that.longitude = res.longitude;
+    let data = {
+      type: 1,
+      takeoutSwitch: 1,
+      pageNo: 1,
+      pageSize: 10,
+      currentLatitude: that.latitude,
+      currentLongitude: that.longitude,
+      lang: ''
+    };
+    const json = await api.hostGoodsList({ query: data });
+    if (json.data.meta.success) {
+      that.harvestdata = json.data.list;
+    } else {
+      Template.error(json.data.meta.message);
+    }
+    that.$apply();
+  }
+  
+
+  events = {};
+
+  onLoad() {
+    let self = this;
+
+    this.getplacename();
+    this.storelist();
+  }
+}
+</script>
