@@ -1,5 +1,5 @@
 /**
- * 提示与加载工具类
+ * 工具类
  */
 export default class Tool {
   constructor() {

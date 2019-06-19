@@ -13,7 +13,7 @@
   import wepy from 'wepy'
   export default class List extends wepy.page {
     config = {
-      navigationBarTitleText: '麦优单列表页'
+      navigationBarTitleText: '列表页'
     }
     components = {
       

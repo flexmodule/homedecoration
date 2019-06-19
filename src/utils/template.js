@@ -28,12 +28,13 @@ export default class Template {
   /**
    * 弹出确认窗口
    */
-  static confirm(text, payload = {}, title = "提示") {
+  static confirm(title = "提示",text,confirmBtn, payload = {}) {
     return new Promise((resolve, reject) => {
       wx.showModal({
         title: title,
         content: text,
-        showCancel: true,
+				showCancel: true,
+				confirmText:confirmBtn,
         success: res => {
           if (res.confirm) {
             resolve(payload);

@@ -16,7 +16,7 @@ import Template from '@/utils/template';
 import Tab from '@/components/tab' 
 export default class Error extends wepy.page {
   config = {
-    navigationBarTitleText: '首页',
+    navigationBarTitleText: '你的页面跑丢了！',
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#f9dc8e',
     navigationBarTextStyle: 'white'

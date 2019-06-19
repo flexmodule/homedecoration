@@ -18,8 +18,7 @@ export default class extends wepy.app {
     pages: [
 			'pages/home/index',
 			'pages/detail/index',
-			'pages/activity/index',
-			'pages/search/index',
+			'pages/plandetail/index',
 			'pages/list/index',
 			'pages/my/index',
 			'pages/index',
@@ -32,13 +31,14 @@ export default class extends wepy.app {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '麦优单',
+      navigationBarTitleText: '汇享家装',
       navigationBarTextStyle: 'black'
     }
   }
 
   globalData = {
-    userInfo: null
+		userInfo: "",
+		appid:""
   }
 
   constructor () {

@@ -1,26 +1,25 @@
 <style lang="less">
-  .Activity {
+  .Goodsdetail {
 
 	}
 </style>
 <template>
-  <view class="Activity">
-    <returnvalue></returnvalue>
-		<tab></tab>
+  <view class="Goodsdetail">
+		
   </view>
 </template>
 
 <script>
 	import wepy from 'wepy'
-	import Tab from '@/components/tab' 
-	import Returnvalue from '@/components/returnvalue' 
-  export default class Activity extends wepy.page {
+	import api from '@/api/api.js';
+	import Template from '@/utils/template';
+	import Tool from '@/utils/tem.js' 
+  export default class Goodsdetail extends wepy.page {
     config = {
-      navigationBarTitleText: '热门活动'
+      navigationBarTitleText: '商品详情'
     }
     components = {
-			tab:Tab,
-			returnvalue:Returnvalue
+      
     }
 
 
